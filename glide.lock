@@ -1,0 +1,71 @@
+hash: e5e891ba13c8a529990b0693baf6050f27fbd8fbb52d7e10bf5162bc6361e33b
+updated: 2016-11-16T15:23:26.316718183-06:00
+imports:
+- name: github.com/facebookgo/clock
+  version: 600d898af40aa09a7a93ecb9265d87b0504b6f03
+- name: github.com/facebookgo/httpdown
+  version: a3b1354551a26449fbe05f5d855937f6e7acbd71
+- name: github.com/facebookgo/stats
+  version: 1b76add642e42c6ffba7211ad7b3939ce654526e
+- name: github.com/fsnotify/fsnotify
+  version: fd9ec7deca8bf46ecd2a795baaacf2b3a9be1197
+- name: github.com/gliderlabs/comlab
+  version: 5ce5f548c88508e671e15ed6c1cd7ab9b90319f8
+  subpackages:
+  - lib/daemon
+  - pkg/com
+  - pkg/log
+  - pkg/com/viper
+- name: github.com/gorilla/context
+  version: 1ea25387ff6f684839d82767c1733ff4d4d15d0a
+- name: github.com/gorilla/securecookie
+  version: fa5329f913702981df43dcb2a380bac429c810b5
+- name: github.com/gorilla/sessions
+  version: ca9ada44574153444b00d3fd9c8559e4cc95f896
+- name: github.com/hashicorp/hcl
+  version: c3e054bfd4dcf77b9965ed2b79b22afa2f41d4eb
+  subpackages:
+  - hcl/ast
+  - hcl/parser
+  - hcl/token
+  - json/parser
+  - hcl/scanner
+  - hcl/strconv
+  - json/scanner
+  - json/token
+- name: github.com/magiconair/properties
+  version: 0723e352fa358f9322c938cc2dadda874e9151a9
+- name: github.com/mgutz/ansi
+  version: c286dcecd19ff979eeb73ea444e479b903f2cfcb
+- name: github.com/mitchellh/mapstructure
+  version: f3009df150dadf309fdee4a54ed65c124afad715
+- name: github.com/pelletier/go-buffruneio
+  version: df1e16fde7fc330a0ca68167c23bf7ed6ac31d6d
+- name: github.com/pelletier/go-toml
+  version: 45932ad32dfdd20826f5671da37a5f3ce9f26a8d
+- name: github.com/spf13/afero
+  version: 06b7e5f50606ecd49148a01a6008942d9b669217
+  subpackages:
+  - mem
+- name: github.com/spf13/cast
+  version: 24b6558033ffe202bf42f0f3b870dcc798dd2ba8
+- name: github.com/spf13/jwalterweatherman
+  version: 33c24e77fb80341fe7130ee7c594256ff08ccc46
+- name: github.com/spf13/pflag
+  version: 5ccb023bc27df288a957c5e994cd44fd19619465
+- name: github.com/spf13/viper
+  version: 651d9d916abc3c3d6a91a12549495caba5edffd2
+- name: github.com/thejerf/suture
+  version: fe1c0d795ff7a7e54fc54ef6afb36ee0adf0c276
+- name: golang.org/x/sys
+  version: b699b7032584f0953262cb2788a0ca19bb494703
+  subpackages:
+  - unix
+- name: golang.org/x/text
+  version: a263ba8db058568bb9beba166777d9c9dbe75d68
+  subpackages:
+  - transform
+  - unicode/norm
+- name: gopkg.in/yaml.v2
+  version: a5b47d31c556af34a302ce5d659e6fea44d90de0
+testImports: []

@@ -1,0 +1,14 @@
+package: github.com/gliderlabs/gliderlabs.io
+ignore:
+- github.com/gliderlabs/gliderlabs.io
+import:
+- package: github.com/facebookgo/httpdown
+- package: github.com/gliderlabs/comlab
+  subpackages:
+  - lib/daemon
+  - pkg/com
+  - pkg/log
+- package: github.com/gorilla/context
+  version: ^1.1.0
+- package: github.com/gorilla/sessions
+  version: ^1.1.0
