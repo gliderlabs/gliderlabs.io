@@ -5,3 +5,9 @@ machine:
 dependencies:
   override:
     - docker build -t glio -f dev/setup/Dockerfile .
+
+deployment:
+  production:
+    branch: master
+    heroku:
+      appname: gliderlabs-io
