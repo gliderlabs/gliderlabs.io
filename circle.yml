@@ -2,17 +2,16 @@ machine:
   services:
     - docker
 
-dependencies:
-  override:
-    - docker build -t glio -f dev/setup/Dockerfile .
-
 test:
   override:
     - docker build -t glio -f dev/setup/Dockerfile .
+    - docker create --name glio glio /config/heroku.toml
 
 deployment:
   production:
     branch: master
     commands:
       - heroku plugins:install heroku-container-registry
-      - make deploy
+      - mkdir -p build/linux-static
+      - docker cp glio:/usr/local/src/github.com/gliderlabs/gliderlabs.io/build/linux-static/glio ./build/linux-static/glio
+      - heroku container:push web -a gliderlabs-io

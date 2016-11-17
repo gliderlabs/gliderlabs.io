@@ -9,4 +9,4 @@ RUN curl https://glide.sh/get | sh
 RUN go get github.com/gliderlabs/comlab/cmd/comlab
 COPY . /usr/local/src/github.com/gliderlabs/gliderlabs.io
 WORKDIR /usr/local/src/github.com/gliderlabs/gliderlabs.io
-RUN TIMEOUT=true make clobber setup linux dev
+RUN TIMEOUT=true make clobber setup static-bin dev
