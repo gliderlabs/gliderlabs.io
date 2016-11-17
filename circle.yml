@@ -15,5 +15,4 @@ deployment:
     branch: master
     commands:
       - heroku plugins:install heroku-container-registry
-      - heroku container:login
       - make deploy
