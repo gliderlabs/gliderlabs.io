@@ -6,8 +6,14 @@ dependencies:
   override:
     - docker build -t glio -f dev/setup/Dockerfile .
 
+test:
+  override:
+    - docker build -t glio -f dev/setup/Dockerfile .
+
 deployment:
   production:
     branch: master
-    heroku:
-      appname: gliderlabs-io
+    commands:
+      - heroku plugins:install heroku-container-registry
+      - heroku container:login
+      - make deploy
