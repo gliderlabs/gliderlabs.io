@@ -43,7 +43,7 @@ test-go: ## test golang packages
 
 test-env: ## test dev environment
 	docker build -t glio-env -f dev/setup/Dockerfile .
-	docker rmi glio-env
+	#docker rmi glio-env
 
 ## DEPENDENCIES
 
