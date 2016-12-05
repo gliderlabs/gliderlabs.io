@@ -30,6 +30,12 @@ func (c *Component) Serve() {
 					return
 				}
 
+				if strings.HasPrefix(r.URL.Path, "/.well-known/") {
+					http.StripPrefix("/.well-known/",
+						http.FileServer(http.Dir(com.GetString("static_dir")+"/.well-known"))).ServeHTTP(lw, r)
+					return
+				}
+
 				// serve semantic ui src. TODO: make dev only
 				if strings.HasPrefix(r.URL.Path, "/_semantic/") {
 					http.StripPrefix("/_semantic/",

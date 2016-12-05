@@ -1,0 +1,7 @@
+[auth0]
+domain = "glio.auth0.com"
+callback_url = "https://gliderlabs.io/_auth/callback"
+logout_url = "https://gliderlabs.io/_auth/logout"
+
+[mailgun]
+domain = "gliderlabs.com"
