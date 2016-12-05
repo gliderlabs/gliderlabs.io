@@ -15,4 +15,5 @@ deployment:
       - docker login --email=_ --username=_ --password=$(heroku auth:token) registry.heroku.com
       - mkdir -p build/linux-static
       - docker cp glio:/usr/local/src/github.com/gliderlabs/gliderlabs.io/build/linux-static/glio ./build/linux-static/glio
+      - docker cp glio:/usr/local/src/github.com/gliderlabs/gliderlabs.io/ui/static/semantic ./ui/static
       - heroku container:push web -a gliderlabs-io

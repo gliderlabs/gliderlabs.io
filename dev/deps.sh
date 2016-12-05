@@ -21,4 +21,4 @@ ifupdated() {
 
 ifupdated glide.yaml deps-go
 #ifupdated ui/package.json deps-js
-#ifupdated ui/semantic deps-css
+ifupdated ui/semantic deps-css
