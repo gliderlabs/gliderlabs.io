@@ -1,0 +1,229 @@
+<html>
+<head>
+  <title>Register {{ .Project | title }}</title>
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+  <link rel="stylesheet" type="text/css" href="/static/semantic/semantic.min.css">
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+  <script src="/static/semantic/semantic.min.js"></script>
+  <style>
+    body {
+      margin-top: 0px;
+      border-top: 4px solid #00A6CE;
+      padding-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="ui text container">
+    <div class="ui middle aligned grid">
+            <div class="eight wide column">
+              <img class="ui image" src="http://gliderlabs.com/images/logo.svg" style="width: 300px;" />
+            </div>
+            <div class="right aligned eight wide column">
+              <h1 class="ui header">{{ .Project | title }} Registration</h1>
+            </div>
+          </div>
+
+        <h3 class="ui header">
+          We appreciate this, {{ .Name }}!
+          <div class="sub header" style="color: gray;">(Not {{ .Nickname }}? <a href="/_auth/logout">Logout</a>)</div>
+        </h3>
+
+        <form action="/register/pay" method="POST" class="ui large form grid">
+
+        <div id="form-messages" class="sixteen wide column" style="display: none;">
+          <div id="form-errors" class="ui small message error"></div>
+        </div>
+
+        <div class="four wide column">
+        <div class="grouped fields">
+            <label for="fruit">Select Your Price</label>
+            <div class="field" onclick="pricePick()">
+              <div class="ui radio checkbox">
+                <input type="radio" name="price" value="$10" tabindex="0" class="hidden">
+                <label>$10</label>
+              </div>
+            </div>
+            <div class="field" onclick="pricePick()">
+              <div class="ui radio checkbox">
+                <input type="radio" name="price" value="$20" checked="" tabindex="0" class="hidden">
+                <label>$20</label>
+              </div>
+            </div>
+            <div class="field" onclick="pricePick()">
+              <div class="ui radio checkbox">
+                <input type="radio" name="price" value="$50" tabindex="0" class="hidden">
+                <label>$50</label>
+              </div>
+            </div>
+            <div class="field" onclick="pricePickCustom()">
+              <div class="ui radio checkbox">
+                <input id="custom-value" type="radio" name="price" tabindex="0" class="hidden">
+                <label id="custom-label">Custom</label> <input style="margin: 0; padding: 0 0 0 25px; font-size: 1em; border: 0; display: none;" id="custom-input" onchange="customChange(this)" type="text" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="five wide column">
+        <div class="grouped fields">
+            <label for="fruit">Select Your Charity</label>
+            <div class="field" onclick="charityPick()">
+              <div class="ui radio checkbox">
+                <input type="radio" name="charity" checked="" value="letsencrypt" class="hidden">
+                <label id="label-letsencrypt">Let's Encrypt</label>
+              </div>
+            </div>
+            <div class="field" onclick="charityPick()">
+              <div class="ui radio checkbox">
+                <input type="radio" name="charity" value="linux" class="hidden">
+                <label id="label-linux">Linux Foundation</label>
+              </div>
+            </div>
+            <div class="field" onclick="charityPick()">
+              <div class="ui radio checkbox">
+                <input type="radio" name="charity" value="eff" class="hidden">
+                <label id="label-eff">EFF</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="seven wide column">
+          <div class="field">
+            <label>Confirm Your Email</label>
+            <input type="text" name="email" placeholder="Email address" value="{{ .Email }}">
+          </div>
+          <!--div class="inline field">
+              <div class="ui checkbox">
+                <input type="checkbox" tabindex="0" class="hidden">
+                <label>Get notified of new projects</label>
+              </div>
+            </div-->
+        </div>
+
+          <div class="fields" style="margin-bottom: 0px;">
+            <div class="seven wide field">
+              <label>Card Number</label>
+              <input type="text" data-stripe="number" placeholder="Card number">
+            </div>
+
+            <div class="six wide field">
+              <label>Expiration (mm/yy)</label>
+              <div class="two fields">
+                <div class="field">
+                  <input type="text" data-stripe="exp_month" maxlength="2" placeholder="Month">
+                </div>
+                <div style="padding-top: 10px;">/</div>
+                <div class="field">
+                  <input type="text" data-stripe="exp_year" maxlength="2" placeholder="Year">
+                </div>
+              </div>
+            </div>
+
+            <div class="three wide field">
+              <label>CVC</label>
+              <input type="text" data-stripe="cvc" maxlength="3" placeholder="CVC">
+            </div>
+
+            <div class="three wide field">
+              <label>Billing Zip</label>
+              <input type="text" data-stripe="address_zip" placeholder="Zipcode">
+            </div>
+          </div>
+
+
+            <div class="three wide column">
+              <div class="ui header">Your Total:</div>
+            </div>
+            <div class="nine wide column">
+              <div class="ui large header">
+                <div class="content">
+                  <span id="total">$20</span> <small>USD</small>
+                  <div class="sub header">10% will go to <span id="charity">EFF</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="four wide column">
+              <input id="submit-button" class="ui right floated primary big button" type="submit" value="Register">
+            </div>
+            <input type="hidden" name="project" value="{{ .Project }}" />
+        </form>
+    </div>
+
+    <script type="text/javascript">
+    $('.ui.checkbox')
+      .checkbox()
+    ;
+    $('.ui.radio.checkbox')
+      .checkbox()
+    ;
+    var price = "";
+    function charityPick() {
+      var value = $('#label-'+$('form').form('get value', 'charity')).text();
+      $("#charity").text(value);
+    }
+    function pricePickCustom() {
+      $('#custom-label').text('');
+      $('#custom-input').val(price).show().select();
+    }
+    function customChange(el) {
+      var value = $(el).val().trim();
+      if (value[0] != "$") {
+        value = "$"+value;
+        $(el).val(value);
+      }
+      $('#custom-value').val(value);
+      pricePick();
+    }
+    function pricePick() {
+      price = $('form').form('get value', 'price');
+      $("#total").text(price);
+    }
+    pricePick();
+    charityPick();
+
+    Stripe.setPublishableKey('{{ .StripeKey }}');
+    $(function() {
+      var $form = $('form');
+      $form.submit(function(event) {
+        // Disable the submit button to prevent repeated clicks:
+        $form.find('#submit-button').prop('disabled', true);
+
+        // Request a token from Stripe:
+        Stripe.card.createToken($form, stripeResponseHandler);
+
+        // Prevent the form from being submitted:
+        return false;
+      });
+    });
+    function stripeResponseHandler(status, response) {
+      // Grab the form:
+      var $form = $('form');
+
+      if (response.error) { // Problem!
+
+        // Show the errors on the form:
+        $('#form-messages').show();
+        $('#form-errors').show().text(response.error.message);
+        $('#submit-button').prop('disabled', false); // Re-enable submission
+
+      } else { // Token was created!
+
+        // Get the token ID:
+        var token = response.id;
+
+        // Insert the token ID into the form so it gets submitted to the server:
+        $form.append($('<input type="hidden" name="stripeToken">').val(token));
+
+        // Submit the form:
+        //console.log($form);
+        $form.get(0).submit();
+      }
+    };
+    </script>
+</body>
+</html>

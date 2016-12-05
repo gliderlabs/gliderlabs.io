@@ -1,0 +1,43 @@
+<html>
+<head>
+  <title>{{ .Project | title }} Registration Key</title>
+  <link rel="stylesheet" type="text/css" href="/static/semantic/semantic.min.css">
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+  <script src="/static/semantic/semantic.min.js"></script>
+  <style>
+    body {
+      margin-top: 0px;
+      border-top: 4px solid #00A6CE;
+      padding-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="ui text container">
+    <div class="ui middle aligned grid">
+            <div class="eight wide column">
+              <img class="ui image" src="http://gliderlabs.com/images/logo.svg" style="width: 300px;" />
+            </div>
+            <div class="right aligned eight wide column">
+              <h1 class="ui header">{{ .Project | title }} Registration</h1>
+            </div>
+          </div>
+
+        <h2 class="ui header">
+          Thanks for registering, {{ .Name }}!
+          <div class="sub header" style="color: gray;">(Not {{ .Nickname }}? <a href="/_auth/logout">Logout</a>)</div>
+        </h2>
+        <p>Now that you've registered, you can use this registration key with {{ .Project | title }}. You should also have received an email with this key for your records.</p>
+        <p>Set the environment variable <code>GL_KEY</code> to the key below when running {{ .Project | title }}, or set it in your Bash profile. <a href="https://github.com/gliderlabs/{{ .Project }}/blob/master/REGISTER.md">Click here</a> for more detailed instructions.</p>
+        <div class="ui huge form">
+        <div class="field">
+          <label>Your {{ .Project | title }} Registration Key</label>
+          <input type="text" readonly="" onclick="this.select()" style="font-family: monospace;" value="{{ .Key }}" />
+        </div>
+        </div>
+      </div>
+</body>
+</html>
