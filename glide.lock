@@ -1,5 +1,5 @@
 hash: e5e891ba13c8a529990b0693baf6050f27fbd8fbb52d7e10bf5162bc6361e33b
-updated: 2016-11-16T15:23:26.316718183-06:00
+updated: 2016-12-05T15:43:11.48522947-06:00
 imports:
 - name: github.com/facebookgo/clock
   version: 600d898af40aa09a7a93ecb9265d87b0504b6f03
@@ -16,12 +16,22 @@ imports:
   - pkg/com
   - pkg/log
   - pkg/com/viper
+- name: github.com/gliderlabs/pkg
+  version: 646fc5e1e45eab929c95624d8570101a7196c719
+  subpackages:
+  - auth0
+- name: github.com/golang/protobuf
+  version: 8ee79997227bf9b34611aee7946ae64735e6fd93
+  subpackages:
+  - proto
 - name: github.com/gorilla/context
   version: 1ea25387ff6f684839d82767c1733ff4d4d15d0a
 - name: github.com/gorilla/securecookie
   version: fa5329f913702981df43dcb2a380bac429c810b5
 - name: github.com/gorilla/sessions
   version: ca9ada44574153444b00d3fd9c8559e4cc95f896
+- name: github.com/gorilla/websocket
+  version: e8f0f8aaa98dfb6586cbdf2978d511e3199a960a
 - name: github.com/hashicorp/hcl
   version: c3e054bfd4dcf77b9965ed2b79b22afa2f41d4eb
   subpackages:
@@ -33,16 +43,26 @@ imports:
   - hcl/strconv
   - json/scanner
   - json/token
+- name: github.com/lytics/base62
+  version: 2c06157bd55d0d09bb15e7648606e065a8a5079f
 - name: github.com/magiconair/properties
   version: 0723e352fa358f9322c938cc2dadda874e9151a9
 - name: github.com/mgutz/ansi
   version: c286dcecd19ff979eeb73ea444e479b903f2cfcb
 - name: github.com/mitchellh/mapstructure
   version: f3009df150dadf309fdee4a54ed65c124afad715
+- name: github.com/pborman/uuid
+  version: 3d4f2ba23642d3cfd06bd4b54cf03d99d95c0f1b
 - name: github.com/pelletier/go-buffruneio
   version: df1e16fde7fc330a0ca68167c23bf7ed6ac31d6d
 - name: github.com/pelletier/go-toml
   version: 45932ad32dfdd20826f5671da37a5f3ce9f26a8d
+- name: github.com/progrium/duplex
+  version: 1e6a79a1136af221d9d2520cfd0fcd6c9fa14472
+  subpackages:
+  - golang
+- name: github.com/satori/go.uuid
+  version: b061729afc07e77a8aa4fad0a2fd840958f1942a
 - name: github.com/spf13/afero
   version: 06b7e5f50606ecd49148a01a6008942d9b669217
   subpackages:
@@ -55,8 +75,21 @@ imports:
   version: 5ccb023bc27df288a957c5e994cd44fd19619465
 - name: github.com/spf13/viper
   version: 651d9d916abc3c3d6a91a12549495caba5edffd2
+- name: github.com/stripe/stripe-go
+  version: a34c407200879c4c1885b4289f2e1d459b450976
+  subpackages:
+  - charge
+  - orderitem
 - name: github.com/thejerf/suture
   version: fe1c0d795ff7a7e54fc54ef6afb36ee0adf0c276
+- name: golang.org/x/net
+  version: 6cdc0daab091c43fc46193327e0047b4f883c613
+  subpackages:
+  - context
+- name: golang.org/x/oauth2
+  version: f6093e37b6cb4092101a298aba5d794eb570757f
+  subpackages:
+  - internal
 - name: golang.org/x/sys
   version: b699b7032584f0953262cb2788a0ca19bb494703
   subpackages:
@@ -66,6 +99,18 @@ imports:
   subpackages:
   - transform
   - unicode/norm
+- name: google.golang.org/appengine
+  version: ca59ef35f409df61fa4a5f8290ff289b37eccfb8
+  subpackages:
+  - urlfetch
+  - internal
+  - internal/urlfetch
+  - internal/base
+  - internal/datastore
+  - internal/log
+  - internal/remote_api
+- name: gopkg.in/mailgun/mailgun-go.v1
+  version: 369a1fa57ce6fb314e627087b9fff0db5c266c0f
 - name: gopkg.in/yaml.v2
   version: a5b47d31c556af34a302ce5d659e6fea44d90de0
 testImports: []
