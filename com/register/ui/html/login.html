@@ -1,0 +1,44 @@
+<html>
+<head>
+  <title>Register {{ .Project | title }}</title>
+  <link rel="stylesheet" type="text/css" href="/static/semantic/semantic.min.css">
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+  <script src="/static/semantic/semantic.min.js"></script>
+  <style>
+    body {
+      margin-top: 0px;
+      border-top: 4px solid #00A6CE;
+      padding-top: 50px;
+    }
+    p {
+      font-size: 1.1em;
+      text-align: justify;
+    }
+  </style>
+</head>
+<body>
+  <div class="ui text container">
+    <div class="ui middle aligned grid">
+            <div class="eight wide column">
+              <img class="ui image" src="http://gliderlabs.com/images/logo.svg" style="width: 300px;" />
+            </div>
+            <div class="right aligned eight wide column">
+              <h1 class="ui header">{{ .Project | title }} Registration</h1>
+            </div>
+          </div>
+
+        <h2 class="first">Thanks for using {{ .Project | title }}!</h2>
+        <p>Hi! My name is Jeff Lindsay. I started Glider Labs simply to build innovative open source. The problem is that nobody gets paid to do that. So in order to sustain our projects and<br /> <strong>help support our community</strong>, we've devised this registration system.</p>
+        <p>Registering this application is the <strong>best way to support our open source software</strong>, and makes sure our hard work is sustainable. It also gets rid of any pesky nags or mentions of registering.
+        </p>
+        <p>And! It's not just for us &mdash; 10% of your registration payment will go to <strong>your choice of charity</strong> supporting the greater open source and digital ecosystem.</p>
+        <p>Best part? It's <strong>Pay-What-You-Want</strong>! Ready? Quick and painless, first <a href="javascript:auth0.login()">sign-in with GitHub</a>.</p>
+    </div>
+    <script>
+      {{auth0}}
+    </script>
+</body>
+</html>

@@ -3,3 +3,10 @@
 /build
 /vendor
 /.env
+/ui/node_modules
+/ui/semantic/node_modules
+/ui/semantic/dist
+/ui/static/semantic
+/ui/static/bundle*
+/ui/src/com
+npm-debug.log
