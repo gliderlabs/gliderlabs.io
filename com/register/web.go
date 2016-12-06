@@ -134,7 +134,7 @@ For further instructions see %s
 -jeff`, strings.Split(web.SessionValue(r, "user_name"), " ")[0],
 			strings.Title(r.FormValue("project")),
 			key,
-			fmt.Sprintf("https://%s/register/%s", r.URL.Host, r.FormValue("project"))),
+			fmt.Sprintf("https://%s/register/%s", r.Host, r.FormValue("project"))),
 	)
 	if err != nil {
 		log.Info("mailgun", err)
