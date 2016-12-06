@@ -123,7 +123,7 @@ func payHandler(w http.ResponseWriter, r *http.Request) {
 		r.FormValue("email"),
 		"Jeff Lindsay <jeff@gliderlabs.com>",
 		fmt.Sprintf("Registration Key for %s", strings.Title(r.FormValue("project"))),
-		fmt.Sprintf(`Hello %s!
+		fmt.Sprintf(`Hello, %s!
 
 Thanks again for registering %s and supporting our work. Here is your registration key:
 
@@ -131,10 +131,10 @@ Thanks again for registering %s and supporting our work. Here is your registrati
 
 For further instructions see %s
 
--jeff`, web.SessionValue(r, "user_name"),
+-jeff`, strings.Split(web.SessionValue(r, "user_name"), " ")[0],
 			strings.Title(r.FormValue("project")),
 			key,
-			"http://localhost:8080/register/"+r.FormValue("project")),
+			fmt.Sprintf("https://%s/register/%s", r.URL.Host, r.FormValue("project"))),
 	)
 	if err != nil {
 		log.Info("mailgun", err)
