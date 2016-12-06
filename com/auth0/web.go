@@ -7,7 +7,6 @@ import (
 	"text/template"
 
 	"github.com/gliderlabs/comlab/pkg/com"
-	"github.com/gliderlabs/gliderlabs.io/com/web"
 )
 
 func (c *Component) WebTemplateFuncMap(r *http.Request) template.FuncMap {
@@ -54,11 +53,8 @@ func (c *Component) MatchHTTP(r *http.Request) bool {
 func (c *Component) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if logout, err := url.Parse(com.GetString("logout_url")); err == nil {
 		if r.URL.Path == logout.Path {
-			if web.Return(r, w) {
-				return
-			}
-			if err := web.SetReturn(r, w, r.Referer()); err != nil {
-				http.Error(w, err.Error(), http.StatusInternalServerError)
+			if returnTo := r.URL.Query().Get("return"); returnTo != "" {
+				http.Redirect(w, r, returnTo, http.StatusFound)
 				return
 			}
 			if LogoutCallback != nil {
@@ -67,7 +63,15 @@ func (c *Component) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 					return
 				}
 			}
-			http.Redirect(w, r, Client().LogoutURL(com.GetString("logout_url")), http.StatusFound)
+			q := url.Values{}
+			q.Set("return", r.Referer())
+			returnURL := &url.URL{
+				Scheme:   logout.Scheme,
+				Host:     logout.Host,
+				Path:     logout.Path,
+				RawQuery: q.Encode(),
+			}
+			http.Redirect(w, r, Client().LogoutURL(returnURL.String()), http.StatusFound)
 			return
 		}
 	}

@@ -1,5 +1,5 @@
 hash: e5e891ba13c8a529990b0693baf6050f27fbd8fbb52d7e10bf5162bc6361e33b
-updated: 2016-12-05T15:43:11.48522947-06:00
+updated: 2016-12-05T20:38:48.541777625-06:00
 imports:
 - name: github.com/facebookgo/clock
   version: 600d898af40aa09a7a93ecb9265d87b0504b6f03
@@ -17,7 +17,7 @@ imports:
   - pkg/log
   - pkg/com/viper
 - name: github.com/gliderlabs/pkg
-  version: 646fc5e1e45eab929c95624d8570101a7196c719
+  version: 36f28d47ec7aae4d25d3d2741ac5af91f7f18680
   subpackages:
   - auth0
 - name: github.com/golang/protobuf

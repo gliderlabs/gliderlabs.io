@@ -52,36 +52,6 @@ func SessionDel(r *http.Request, w http.ResponseWriter, key string) error {
 	return nil
 }
 
-func SetReturn(r *http.Request, w http.ResponseWriter, url string) error {
-	session, err := Sessions.Get(r, "return")
-	if err != nil {
-		return err
-	}
-	session.Values["to"] = url
-	if err := session.Save(r, w); err != nil {
-		return err
-	}
-	return nil
-}
-
-func Return(r *http.Request, w http.ResponseWriter) bool {
-	session, err := Sessions.Get(r, "return")
-	if err != nil {
-		return false
-	}
-	returnTo, isSet := session.Values["to"]
-	if !isSet {
-		return false
-	}
-	delete(session.Values, "to")
-	session.Options.MaxAge = -1
-	if err := session.Save(r, w); err != nil {
-		return false
-	}
-	http.Redirect(w, r, returnTo.(string), http.StatusFound)
-	return true
-}
-
 // RenderTemplate ...
 func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, data interface{}) {
 	_, filename, _, _ := runtime.Caller(1)
