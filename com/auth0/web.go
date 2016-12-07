@@ -13,23 +13,24 @@ func (c *Component) WebTemplateFuncMap(r *http.Request) template.FuncMap {
 	return template.FuncMap{
 		"auth0": func() string {
 			return fmt.Sprintf(`
-				var auth0 = {};
-				auth0.init = function() {
+				var auth0;
+				(function() {
 					var js = document.createElement("script");
 					js.type = "text/javascript";
-					js.src = "https://cdn.auth0.com/js/lock-9.0.min.js";
+					js.src = "https://cdn.auth0.com/w2/auth0-7.4.min.js";
 					js.onload = function() {
-						auth0.lock = new Auth0Lock('%s', '%s');
-						auth0.login = function() {
-							auth0.lock.show({callbackURL: '%s'});
-						};
+						auth0 = new Auth0({
+					    domain:       '%s',
+					    clientID:     '%s',
+					    callbackURL:  '%s',
+							responseType: 'code'
+					  });
 					};
 					document.body.appendChild(js);
-				};
-				auth0.init();
+				})();
 			`,
-				com.GetString("client_id"),
 				com.GetString("domain"),
+				com.GetString("client_id"),
 				com.GetString("callback_url"))
 		},
 	}
@@ -88,4 +89,11 @@ func (c *Component) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
+
+	state := r.URL.Query().Get("state")
+	if state != "" {
+		http.Redirect(w, r, state, http.StatusFound)
+		return
+	}
+	http.Redirect(w, r, r.Referer(), http.StatusFound)
 }
