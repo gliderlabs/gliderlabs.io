@@ -31,11 +31,17 @@
           </div>
 
         <h2 class="first">Thanks for using {{ .Project | title }}!</h2>
-        <p>Hi! My name is Jeff Lindsay. I started Glider Labs simply to build innovative open source. The problem is that nobody gets paid to do that. So in order to sustain our projects and<br /> <strong>help support our community</strong>, we've devised this registration system.</p>
+        <p>Hi! My name is Jeff Lindsay. I started Glider Labs simply to build innovative open source. In order to sustain our projects and <strong>help support our community</strong>, we've devised this registration system.</p>
         <p>Registering this application is the <strong>best way to support our open source software</strong>, and makes sure our hard work is sustainable. It also gets rid of any pesky nags or mentions of registering.
         </p>
         <p>And! It's not just for us &mdash; 10% of your registration payment will go to <strong>your choice of charity</strong> supporting the greater open source and digital ecosystem.</p>
-        <p>Best part? It's <strong>Pay-What-You-Want</strong>! Ready? Quick and painless, first <a href="javascript:auth0.login()">sign-in with GitHub</a>.</p>
+        <p>Best part? It's <strong>Pay-What-You-Want</strong>! Ready? Quick and painless, first login with GitHub:</p>
+        <p style="text-align:center;">
+          <a class="ui large labeled icon button primary" href="javascript:auth0.login({connection:'github',state:location.toString()})">
+            <i class="icon github"></i>
+            Login with GitHub
+          </a>
+        </p>
     </div>
     <script>
       {{auth0}}

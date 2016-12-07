@@ -31,7 +31,7 @@ func (c *Component) AppPreStart() error {
 		web.SessionSet(r, w, "user_email", userinfo["email"].(string))
 		web.SessionSet(r, w, "user_id", userinfo["user_id"].(string))
 
-		http.Redirect(w, r, r.Referer(), http.StatusFound)
+		//http.Redirect(w, r, r.Referer(), http.StatusFound)
 		return nil
 	}
 	auth0.LogoutCallback = func(w http.ResponseWriter, r *http.Request) error {
