@@ -2,10 +2,10 @@ package register
 
 import (
 	"bytes"
+	"encoding/base64"
 	"fmt"
 
 	"github.com/gliderlabs/gliderlabs.io/com/auth0"
-	"github.com/lytics/base62"
 	"github.com/mitchellh/mapstructure"
 	"github.com/satori/go.uuid"
 )
@@ -43,11 +43,11 @@ func LookupUser(uid string) (User, error) {
 func GenerateKey(lookupKey string) string {
 	id := uuid.NewV4()
 	rawKey := append([]byte(fmt.Sprintf("1:%s:", lookupKey)), id.Bytes()...)
-	return base62.StdEncoding.EncodeToString(rawKey)
+	return base64.URLEncoding.EncodeToString(rawKey)
 }
 
 func ExtractLookupKey(key string) string {
-	data, err := base62.StdEncoding.DecodeString(key)
+	data, err := base64.URLEncoding.DecodeString(key)
 	if err != nil {
 		return ""
 	}
